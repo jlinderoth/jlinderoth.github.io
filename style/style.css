@@ -1,0 +1,175 @@
+/*
+ default style-sheet for mip 2008 webspace.
+*/
+
+body { 
+background-color : #000000;
+font-family : Georgia, "Times New Roman", Times, serif;
+font-size : 100%;
+color : #FFD600;
+margin : 0;
+padding : 0;
+text-align : left;
+}
+
+/*
+ the left menu
+*/
+
+#left_box
+{
+    position: fixed;
+    left: 10;
+    top: 1em;
+    width: 210;
+    height: 100%;
+    line-height: 180%;
+}
+
+/*
+ the rest of the page
+*/
+#content_box
+{
+    position: absolute;
+    left: 210;
+    right: 0;
+    top: 1em;
+    padding: 0 5px 0 5px;
+}
+
+/*
+  Headers
+*/
+h1
+{
+    font-size: 28;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+h2
+{
+    font-size: 20;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0.6em;
+    text-decoration: none;
+}
+
+h3
+{
+    font-size: 16;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0.4em;
+    text-decoration: none;
+}
+
+dt
+{
+    font-size: 16;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+*.page_header
+{
+    font-size: 28;
+    font-weight: bold;
+    text-align: left;
+    text-decoration: none;
+}
+
+*.subhead
+{
+    font-size: 16;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+*.shadebox
+{
+    padding: 1em 1em 1em 1em;
+    border: solid thin;
+    margin: 1em 1em;
+    font-size: 12;
+    background: #ddd
+}
+
+*.big_font
+{
+    font-size: 18;
+    font-weight: normal;
+    text-align: left;
+}
+
+p, div, *.normal_text
+{
+    font-size: 16;
+    font-style: normal;
+    text-decoration: none;
+}
+
+*.para
+{
+    text-align: justify;
+}
+
+div.syscommand {
+    width: 100%;
+    border: none;
+    background-color: #ddd;
+    font-family: courier;
+}
+
+div.bottomline
+{
+    text-align: center;
+    font-style: italic;
+    font-size: 12;
+}
+
+
+a:link
+{
+    text-decoration: none;
+    color: #00FFFF;
+}
+
+a:hover
+{
+    text-decoration: underline;
+    background-color: #dde;
+}
+
+a:visited
+{
+    text-decoration: none;
+    color: #A000FF;
+}
+
+a:visited:hover
+{
+    text-decoration: underline;
+    background-color: #edd;
+}
+
+a:hover img
+{
+    border: 0;
+    text-decoration: none;
+    background-color: #fff;
+}
+
+a img
+{
+    border: 0;
+    text-decoration: none;
+}
+
+
+
+
