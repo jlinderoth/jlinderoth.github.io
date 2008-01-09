@@ -35,7 +35,7 @@ text-align : left;
 #content_box
 {
     position: absolute;
-    left: 0;
+    left: 150;
     right: 0;
     top: 1em;
     padding: 0 5px 0 5px;
@@ -140,25 +140,25 @@ div.bottomline
 a:link
 {
     text-decoration: none;
-    color: #00FFFF;
+    color: #FFFF00;
 }
 
 a:hover
 {
     text-decoration: underline;
-    background-color: #dde;
+    background-color: #aaa;
 }
 
 a:visited
 {
     text-decoration: none;
-    color: #A000FF;
+    color: #FFFF00;
 }
 
 a:visited:hover
 {
     text-decoration: underline;
-    background-color: #edd;
+    background-color: #aaa;
 }
 
 a:hover img
