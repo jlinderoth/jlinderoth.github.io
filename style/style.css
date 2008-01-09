@@ -9,6 +9,7 @@ font-size : 100%;
 color : #990000;
 margin : 0;
 padding : 0;
+border: 0;
 text-align : left;
 }
 
@@ -27,7 +28,20 @@ text-align : left;
     height: 100%;
     line-height: 150%;
     text-align: center;
+
 }
+
+
+div#left_box a:link { 
+	text-decoration: none;
+    	color: #FFFF00;
+}			
+
+div#left_box a:visited {
+    	text-decoration: none;
+    	color: #FFFF00;
+}
+
 
 /*
  the rest of the page
@@ -40,6 +54,7 @@ text-align : left;
     top: 1em;
     padding: 0 5px 0 5px;
     margin: 20;
+	
 }
 
 /*
@@ -140,7 +155,13 @@ div.bottomline
 a:link
 {
     text-decoration: none;
-    color: #FFFF00;
+    color: #00AFFF;
+}
+
+a:visited 
+{
+    text-decoration: none;
+    color: #00AFFF;
 }
 
 a:hover
@@ -149,11 +170,6 @@ a:hover
     background-color: #aaa;
 }
 
-a:visited
-{
-    text-decoration: none;
-    color: #FFFF00;
-}
 
 a:visited:hover
 {
@@ -176,4 +192,13 @@ a img
 
 
 
-
+catalog {display:block; padding:10px; }
+pub {display:block; padding:20px; margin-left:20px;
+margin-right:30px; border-top:5px solid #ccc;}
+title {display:block; padding 5px; font-weight:bold; font-variant:small-caps; 
+margin-bottom:10px; }
+abs {display:block; padding:5px;}
+author {display:inline; padding:5px;}
+ref {display:block; padding:5px; font-style:oblique;}
+pdf {display:inline; padding:5px;}
+bib {display:inline; padding:5px;}
