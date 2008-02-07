@@ -1,5 +1,5 @@
 /*
- default style-sheet for mip 2008 webspace.
+ default style-sheet for Jeff's webspace
 */
 
 body { 
@@ -43,6 +43,8 @@ div#left_box a:visited {
 }
 
 
+
+
 /*
  the rest of the page
 */
@@ -56,6 +58,17 @@ div#left_box a:visited {
     margin: 20;
 	
 }
+
+div#content_box a:link { 
+	text-decoration: none;
+    	color: #00AFFF;
+}			
+
+div#content_box a:visited {
+    	text-decoration: none;
+    	color: #00AFFF;
+}
+
 
 /*
   Headers
@@ -195,13 +208,3 @@ a img
 
 
 
-catalog {display:block; padding:10px; }
-pub {display:block; padding:20px; margin-left:20px;
-margin-right:30px; border-top:5px solid #ccc;}
-title {display:block; padding 5px; font-weight:bold; font-variant:small-caps; 
-margin-bottom:10px; }
-abs {display:block; padding:5px;}
-author {display:inline; padding:5px;}
-ref {display:block; padding:5px; font-style:oblique;}
-pdf {display:inline; padding:5px;}
-bib {display:inline; padding:5px;}
