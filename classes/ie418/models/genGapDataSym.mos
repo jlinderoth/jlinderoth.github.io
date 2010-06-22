@@ -1,0 +1,25 @@
+!$Id: genGapDataSym.mos,v 1.1 2005/04/25 18:09:36 jeff Exp $
+
+procedure genGapDataSym
+
+declarations
+t1: integer
+t2: integer
+end-declarations
+
+! generate data
+setrandseed(666)
+forall(j in N) do
+	t1 := integer(round((100*random)+0.5))
+	t2 := t1 - integer(round((21*random)+0.5))
+	forall(i in M) do
+		a(i,j) := t1
+		c(i,j) := t2
+	end-do
+end-do
+
+forall(i in M) do
+	b(i) := integer(0.8 * (sum(j in N) a(i,j)) / NMACH)
+end-do
+
+end-procedure

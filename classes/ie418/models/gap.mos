@@ -1,0 +1,52 @@
+!$Id: gap.mos,v 1.1 2005/04/25 18:09:36 jeff Exp $
+!
+! Simple GAP model
+! Author: Jeff Linderoth
+!
+model "gap"
+uses "mmxprs"
+
+! Set some (XPRESS) parameters
+! Turn on optimizer logs
+setparam("XPRS_VERBOSE",true)
+
+forward procedure genGapData
+forward procedure genGapDataSym
+
+declarations
+
+	NMACH = 5
+	NJOBS = 15
+
+	M = 1..NMACH
+	N = 1..NJOBS
+	
+	c: array(M,N) of integer ! profit
+	a: array(M,N) of integer ! resource utilization
+	b: array(M) of integer ! capacity
+end-declarations
+
+genGapData
+!genGapDataSym
+
+declarations
+	x: array(M,N) of mpvar ! assignment
+end-declarations
+
+! Objective
+Profit := sum(i in M, j in N) c(i,j) * x(i,j)
+
+! Capacity
+forall(i in M) sum(j in N) a(i,j) * x(i,j) <= b(i)
+
+! Assign all jobs
+forall(j in N) sum(i in M) x(i,j) <= 1
+
+! Binary
+forall(i in M, j in N) x(i,j) is_binary
+
+maximize(Profit)
+
+
+include "genGapData.mos"
+include "genGapDataSym.mos"

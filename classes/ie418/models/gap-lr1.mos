@@ -1,0 +1,81 @@
+!$Id: gap-lr1.mos,v 1.1 2005/04/25 18:09:36 jeff Exp $
+!
+! GAP Model with Lagrangian Relaxation of knapsack constraints
+! Author: Jeff Linderoth
+!
+model "gap"
+uses "mmxprs"
+
+
+forward procedure genGapData
+forward procedure genGapDataSym
+
+! Set some (XPRESS) parameters
+! Turn on optimizer logs
+!setparam("XPRS_VERBOSE",true)
+
+declarations
+
+	NMACH = 5
+	NJOBS = 15
+
+	M = 1..NMACH
+	N = 1..NJOBS
+	
+	c: array(M,N) of integer ! profit
+	a: array(M,N) of integer ! resource utilization
+	b: array(M) of integer ! capacity
+	
+	mu: array(M) of real
+	s: array(M) of real   ! subgradient
+	MAXIT = 500
+	minub: real
+end-declarations
+
+genGapData
+
+declarations
+	x: array(M,N) of mpvar ! assignment
+end-declarations
+
+! Assign all jobs
+forall(j in N) sum(i in M) x(i,j) = 1
+
+! Binary
+forall(i in M, j in N) x(i,j) is_binary
+
+numit := 1
+stepsize := 1.0
+minub := 1.0e+10
+forall(i in M) mu(i) := 5.0
+while(numit <= MAXIT) do
+
+	! Objective
+	LRMU := sum(i in M) mu(i) * b(i) + sum(i in M, j in N) (c(i,j) - mu(i) * a(i,j)) * x(i,j)
+
+	! Solve this (trivial) optimization problem.
+	!  We could even do it by hand, but why!
+	maximize(LRMU)
+	zub:= getobjval
+	writeln("Iteration: ", numit, " Objective: ", zub)
+	if (zub < minub) then
+		minub := zub
+	end-if
+	forall(i in M) do
+		s(i) := b(i) - sum(j in N) a(i,j) * getsol(x(i,j))
+		mu(i) := mu(i) - 1.0/numit * s(i)
+		if (mu(i) < 0) then 
+			mu(i) := 0
+		end-if
+	end-do
+
+	numit+=1
+end-do
+
+writeln("Best Upper Bound Value: ", minub )
+
+
+include "genGapData.mos"
+include "genGapDataSym.mos"
+
+end-model

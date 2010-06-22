@@ -1,0 +1,76 @@
+!$Id: gap-lr2.mos,v 1.1 2005/04/25 18:09:36 jeff Exp $
+!
+! GAP Model with Lagrangian Relaxation of assignment constraints
+! Author: Jeff Linderoth
+!
+model "gap"
+uses "mmxprs"
+
+! Set some (XPRESS) parameters
+! Turn on optimizer logs
+!setparam("XPRS_VERBOSE",true)
+
+forward procedure genGapData
+forward procedure genGapDataSym
+
+declarations
+
+	NMACH = 5
+	NJOBS = 15
+
+	M = 1..NMACH
+	N = 1..NJOBS
+	
+	c: array(M,N) of integer ! profit
+	a: array(M,N) of integer ! resource utilization
+	b: array(M) of integer ! capacity
+	
+	mu: array(N) of real
+	s: array(N) of real
+	MAXIT = 100
+	minub: real
+end-declarations
+
+genGapData
+
+declarations
+	x: array(M,N) of mpvar ! assignment
+end-declarations
+
+! Capacity
+forall(i in M) sum(j in N) a(i,j) * x(i,j) <= b(i)
+
+! Binary
+forall(i in M, j in N) x(i,j) is_binary
+
+numit := 1
+stepsize := 1.0
+minub := 1.0e+10
+forall(i in M) mu(i) := 1.0
+while(numit <= MAXIT) do
+
+	! Objective
+	LRMU := - sum(j in N) mu(j) + sum(i in M, j in N) (c(i,j) + mu(j)) * x(i,j)
+
+	! Solve this (trivial) optimization problem.
+	!  We could even do it by hand, but why!
+	maximize(LRMU)
+	zub:= getobjval
+	writeln("Iteration: ", numit, " Objective: ", zub)
+	if (zub < minub) then
+		minub := zub
+	end-if
+	forall(j in N) do
+		s(j) := sum(i in M) getsol(x(i,j)) - 1.0
+		mu(j) := mu(j) - 1.0/numit * s(j)
+	end-do
+
+	numit+=1
+end-do
+
+writeln("Best Upper Bound Value: ", minub )
+
+include "genGapData.mos"
+include "genGapDataSym.mos"
+
+end-model
