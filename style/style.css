@@ -206,5 +206,7 @@ a img
     text-decoration: none;
 }
 
-
+tr.spaceUnder>td {
+    padding-bottom: 1em;
+}
 
